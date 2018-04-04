@@ -7,8 +7,7 @@ A CLI tool for generating native versions web apps for macOS, using [Juli](https
 Install Juli CLI by cloning this repo and then running `install.sh`
 
 ```sh
-$ git clone https://github.com/seaneking/juli-cli.git ~/.juli-cli
-$ ~/.juli-cli/install.sh
+git clone https://github.com/seaneking/juli-cli.git ~/.juli-cli && ~/.juli-cli/install.sh
 ```
 
 ## Usage
