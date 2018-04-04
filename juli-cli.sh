@@ -77,16 +77,16 @@ function scaffold_bundle() {
 function write_executable() {
   say "Creating app executable..."
 
-  cat << EOF > "${MACOS_DIR}/Executable"
+  cat << EOF > "${MACOS_DIR}/${NAME}"
 #!/usr/bin/env bash
 
 # App name: ${NAME}
 # App url: ${URL}
 # App ID: ${ID}
 
-${JULI_PATH}/Contents/MacOS/Juli --id="${ID}" --name="${NAME}" --url="${URL}"
+${JULI}/Contents/MacOS/Juli --id="${ID}" --name="${NAME}" --url="${URL}"
 EOF
-  chmod +x "${MACOS_DIR}/Executable";
+  chmod +x "${MACOS_DIR}/${NAME}";
 }
 
 function write_icon() {
@@ -105,7 +105,7 @@ function write_plist() {
 <plist version="1.0">
   <dict>
     <key>CFBundleExecutable</key>
-    <string>Executable</string>
+    <string>${NAME}</string>
     <key>CFBundleGetInfoString</key>
     <string>${NAME}</string>
     <key>CFBundleIconFile</key>
