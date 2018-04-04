@@ -9,6 +9,7 @@ while [[ "$#" > 1 ]]; do case $1 in
   esac; shift; shift
 done
 
+# Set vars
 DEST="$HOME/Applications/Juli Apps";
 JULI="/Applications/Juli.app";
 ID="$(echo -n "${NAME}" | sed -e 's/[^[:alnum:]]/-/g' | tr -s '-' | tr A-Z a-z)";
@@ -17,10 +18,10 @@ CONTENT_DIR="${APP_BUNDLE}/Contents";
 MACOS_DIR="${CONTENT_DIR}/MacOS";
 RESOURCE_DIR="${CONTENT_DIR}/Resources";
 
-
-######################
-# Usage instructions #
-######################
+############################
+# Usage instructions       #
+# [WIP] print when no args #
+############################
 read -r -d '' USAGE << EOF
 Usage: juli [opts]
 
@@ -118,7 +119,7 @@ function write_plist() {
 EOF
 }
 
-# Otherwise run the script
+# Run it!
 check_args
 remove_if_exists
 scaffold_bundle
