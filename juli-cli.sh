@@ -79,14 +79,14 @@ function remove_if_exists(){
 }
 
 function scaffold_bundle() {
-  log "Making app bundle..."
+  log "Making app bundle"
 
   mkdir -p "${MACOS_DIR}";
   mkdir -p "${RESOURCE_DIR}";
 }
 
 function write_executable() {
-  log "Creating app executable..."
+  log "Creating app executable"
 
   cat << EOF > "${MACOS_DIR}/${NAME}"
 #!/usr/bin/env bash
@@ -102,13 +102,13 @@ EOF
 
 function write_icon() {
   if [[ "$ICON" ]]; then
-    log "Copying over icon..."
+    log "Copying over icon"
     cp "${ICON}" "${RESOURCE_DIR}/app.icns";
   fi;
 }
 
 function write_plist() {
-  log "Writing app manifest..."
+  log "Writing app manifest"
 
   cat << EOF > "${CONTENT_DIR}/Info.plist"
 <?xml version="1.0" encoding="UTF-8"?>
