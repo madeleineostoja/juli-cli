@@ -35,12 +35,23 @@ EOF
 #############
 # Functions #
 #############
-function say() {
-  tput setaf 6; echo "$1"
-}
+function log() {
+  case "$2" in
+    "error")
+      tput setaf 1
+      ;;
+    "warning")
+      tput setaf 3
+      ;;
+    "success")
+      tput setaf 6
+      ;;
+    *)
+      tput setaf 0
+      ;;
+  esac
 
-function error() {
-  tput setaf 1; echo "$1";
+  echo "$1"
 }
 
 function print_usage() {
@@ -50,32 +61,32 @@ function print_usage() {
 
 function check_args() {
   if [ -z "$NAME" ]; then
-    error "You must specify a name"
+    log "You must specify a name" error
     exit 0
   fi
 
   if [ -z "$URL" ]; then
-    error "You must specify a URL"
+    log "You must specify a URL" error
     exit 0
   fi
 }
 
 function remove_if_exists(){
   if [ -a "${APP_BUNDLE}" ]; then
-    say "$NAME already exists, overwriting..."
+    log "$NAME already exists, overwriting..." warning
     rm -rf "${APP_BUNDLE}";
   fi;
 }
 
 function scaffold_bundle() {
-  say "Making app bundle..."
+  log "Making app bundle..."
 
   mkdir -p "${MACOS_DIR}";
   mkdir -p "${RESOURCE_DIR}";
 }
 
 function write_executable() {
-  say "Creating app executable..."
+  log "Creating app executable..."
 
   cat << EOF > "${MACOS_DIR}/${NAME}"
 #!/usr/bin/env bash
@@ -91,13 +102,13 @@ EOF
 
 function write_icon() {
   if [[ "$ICON" ]]; then
-    say "Copying over icon..."
+    log "Copying over icon..."
     cp "${ICON}" "${RESOURCE_DIR}/app.icns";
   fi;
 }
 
 function write_plist() {
-  say "Writing app manifest..."
+  log "Writing app manifest..."
 
   cat << EOF > "${CONTENT_DIR}/Info.plist"
 <?xml version="1.0" encoding="UTF-8"?>
@@ -127,4 +138,4 @@ write_executable
 write_icon
 write_plist
 
-say "Done!"
+log "Done!" success
