@@ -92,7 +92,7 @@ EOF
 function write_icon() {
   if [[ "$ICON" ]]; then
     say "Copying over icon..."
-    cp -v "${ICON}" "${RESOURCE_DIR}/app.icns";
+    cp "${ICON}" "${RESOURCE_DIR}/app.icns";
   fi;
 }
 
