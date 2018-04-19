@@ -103,7 +103,9 @@ EOF
 function write_icon() {
   if [[ "$ICON" ]]; then
     log "Copying over icon"
-    cp "${ICON}" "${RESOURCE_DIR}/app.icns";
+    sips -s format tiff "${ICON}" --out "${RESOURCE_DIR}/app.tiff" --resampleHeightWidth 128 128 >& /dev/null
+    tiff2icns -noLarge "${RESOURCE_DIR}/app.tiff" >& /dev/null
+    rm -rf "${RESOURCE_DIR}/app.tiff"
   fi;
 }
 
